@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: My_Springboot_app
+  datasource:
+    # url: jdbc:postgresql://localhost:5432/studentdb
+    # driver-class-name: org.postgresql.Driver
+    # username: postgres
+    # password: Mani
+    url: jdbc:mysql://localhost:3306/nikhildb1
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Chinnu@951569
+  jpa:
+    # database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
