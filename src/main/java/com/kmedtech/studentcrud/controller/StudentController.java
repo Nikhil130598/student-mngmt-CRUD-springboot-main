@@ -4,6 +4,7 @@ import com.kmedtech.studentcrud.dto.StudentDTO;
 import com.kmedtech.studentcrud.model.Student;
 import com.kmedtech.studentcrud.service.StudentService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -101,11 +102,24 @@ public class StudentController {
    }
 
    // Get students in paginated format
-   @GetMapping("/Paginated")
-   public Page<StudentDTO> getStudents(@RequestParam int page,
-                                       @RequestParam int size){
-        return studentService.getStudents(page,size);
-   }
+  // @GetMapping("/Paginated")
+   //public Page<StudentDTO> getStudents(@RequestParam int page,
+      //                                 @RequestParam int size){
+      //  return studentService.getStudents(page,size);
+  // }
+
+    // get all students with Pagination
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<StudentDTO>> getAllStudentsPaginated(Pageable pageable) {
+
+        Page<StudentDTO> students = studentService.getAllStudentsPaginated(pageable);
+
+        return ResponseEntity.ok(students);
+    }
+
+
+
 
 
 
@@ -131,8 +145,6 @@ public class StudentController {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
-
-
 
 
 

@@ -79,12 +79,16 @@ public class StudentService {
 
 
      // retrieve students in paginated  and sorted format
-    public Page<StudentDTO> getStudents(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("age").ascending());
-        return studentRepository.findAll(pageable)
-                .map(StudentMapper::toDTO);
+   // public Page<StudentDTO> getStudents(int page, int size) {
+    //    Pageable pageable = PageRequest.of(page,size, Sort.by("age").ascending());
+     //   return studentRepository.findAll(pageable)
+     //           .map(StudentMapper::toDTO);
 
-    }
+   // }
+
+
+
+
 
     // Retrieve a student by ID as DTO
     public StudentDTO getStudentById(Long id) {
@@ -145,5 +149,18 @@ public class StudentService {
     public void deleteStudent(Long id) {
         Student student = findStudentEntityById(id);
         studentRepository.delete(student);
+    }
+
+    // Pagination
+    public Page<StudentDTO> getAllStudentsPaginated(Pageable pageable) {
+
+        return studentRepository.findAll(pageable).map(student -> new StudentDTO(
+
+                student.getId(),
+        student.getFirstName(),
+        student.getLastName(),
+        student.getEmail(),
+        student.getAge()));
+
     }
 }
