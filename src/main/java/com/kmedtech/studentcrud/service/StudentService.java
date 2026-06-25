@@ -80,7 +80,7 @@ public class StudentService {
 
      // retrieve students in paginated  and sorted format
     public Page<StudentDTO> getStudents(int page, int size) {
-        Pageable pageable = PageRequest.of(page,size, Sort.by("age").ascending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("age").ascending());
         return studentRepository.findAll(pageable)
                 .map(StudentMapper::toDTO);
 
