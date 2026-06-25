@@ -77,6 +77,8 @@ public class StudentService {
                 .toList();
     }
 
+
+     // retrieve students in paginated  and sorted format
     public Page<StudentDTO> getStudents(int page, int size) {
         Pageable pageable = PageRequest.of(page,size, Sort.by("age").ascending());
         return studentRepository.findAll(pageable)

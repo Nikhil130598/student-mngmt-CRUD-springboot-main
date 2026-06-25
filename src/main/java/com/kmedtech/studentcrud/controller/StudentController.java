@@ -93,7 +93,6 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getStudentsByAgeGreaterThan(age));
     }
 
-
     // GET student by ID - GET http://localhost:8080/api/students/{id}
     @GetMapping("/{id}")
      public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
@@ -101,7 +100,8 @@ public class StudentController {
        return ResponseEntity.ok(student);
    }
 
-   @GetMapping("/Pagenated")
+   // Get students in paginated format
+   @GetMapping("/Paginated")
    public Page<StudentDTO> getStudents(@RequestParam int page,
                                        @RequestParam int size){
         return studentService.getStudents(page,size);
