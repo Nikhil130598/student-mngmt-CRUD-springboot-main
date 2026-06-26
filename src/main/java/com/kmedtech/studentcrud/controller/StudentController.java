@@ -35,32 +35,6 @@ public class StudentController {
 //
 //       return studentService.getStudentsByFirstName(firstName);
 //    }
-//
-//    // retrieve students by their last names
-//    @GetMapping("/lastName")
-//    public List<Student> filterStudentsByLastName(@RequestParam String lastName) {
-//
-//        return studentService.getStudentsByLastName(lastName);
-//    }
-//    // retrieve students by their ages
-//    @GetMapping("/age")
-//    public List<Student> filterStudentsByAge(@RequestParam Integer age) {
-//
-//        return studentService.getStudentsByAge(age);
-//    }
-
-//    // retrieve students by their age conditions
-//    @GetMapping("/agefilter")
-//    public List<Student> filterStudentsByAgeGreaterThan(@RequestParam Integer age) {
-//
-//        return studentService.getStudentsByAgeGreaterThan(age);
-//    }
-    @GetMapping("/{id}/email")
-    public ResponseEntity<String> getStudentEmail(
-            @PathVariable Long id) {
-        return ResponseEntity.ok(
-                studentService.getStudentEmail(id));
-   }
 
     @GetMapping("/firstname/{firstName}")
     public ResponseEntity<List<StudentDTO>>
@@ -70,6 +44,13 @@ public class StudentController {
         return ResponseEntity.ok(
                 studentService.getStudentsByFirstName(firstName));
     }
+//
+//    // retrieve students by their last names
+//    @GetMapping("/lastName")
+//    public List<Student> filterStudentsByLastName(@RequestParam String lastName) {
+//
+//        return studentService.getStudentsByLastName(lastName);
+//    }
 
     @GetMapping("/lastname/{lastName}")
     public ResponseEntity<List<StudentDTO>>
@@ -79,6 +60,12 @@ public class StudentController {
         return ResponseEntity.ok(
                 studentService.getStudentsByLastName(lastName));
     }
+//    // retrieve students by their ages
+//    @GetMapping("/age")
+//    public List<Student> filterStudentsByAge(@RequestParam Integer age) {
+//
+//        return studentService.getStudentsByAge(age);
+//    }
 
     @GetMapping("/Age/{age}")
     public ResponseEntity<List<StudentDTO>>
@@ -87,12 +74,27 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getStudentsByAge(age));
     }
 
+//    // retrieve students by their age conditions
+//    @GetMapping("/agefilter")
+//    public List<Student> filterStudentsByAgeGreaterThan(@RequestParam Integer age) {
+//
+//        return studentService.getStudentsByAgeGreaterThan(age);
+//    }
+
     @GetMapping("/age greater than/{age}")
-            public ResponseEntity<List<StudentDTO>>
+    public ResponseEntity<List<StudentDTO>>
     getStudentsByAgeGreaterThan(@PathVariable Integer age){
 
         return ResponseEntity.ok(studentService.getStudentsByAgeGreaterThan(age));
     }
+
+    @GetMapping("/{id}/email")
+    public ResponseEntity<String> getStudentEmail(
+            @PathVariable Long id) {
+        return ResponseEntity.ok(
+                studentService.getStudentEmail(id));
+   }
+
 
     // GET student by ID - GET http://localhost:8080/api/students/{id}
     @GetMapping("/{id}")
@@ -143,9 +145,6 @@ public class StudentController {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
 
 
 }

@@ -40,12 +40,22 @@ public class StudentService {
         return student.getEmail();
     }
 
+    //    retrieving students by firstname
+//
+//    public List<Student> getStudentsByFirstName(String firstName){
+//        return studentRepository.findByFirstName(firstName);
+//    }
+
     public List<StudentDTO> getStudentsByFirstName(String firstName) {
         return studentRepository.findByFirstName(firstName)
                 .stream()
                 .map(StudentMapper::toDTO)
                 .toList();
     }
+
+    //    public List<Student> getStudentsByLastName(String lastName){
+//        return studentRepository.findByLastName(lastName);
+//    }
 
     public List<StudentDTO> getStudentsByLastName(String lastName) {
         return studentRepository.findByLastName(lastName)
@@ -54,12 +64,20 @@ public class StudentService {
                 .toList();
     }
 
+    //    public List<Student> getStudentsByAge(Integer age){
+//        return studentRepository.findByAge(age);
+//    }
+
     public List<StudentDTO> getStudentsByAge(Integer age){
         return studentRepository.findByAge(age)
                 .stream()
                 .map(StudentMapper::toDTO)
                 .toList();
     }
+
+    //    public List<Student> getStudentsByAgeGreaterThan(Integer age){
+//        return studentRepository.findByAgeGreaterThan(age);
+//    }
 
     public List<StudentDTO> getStudentsByAgeGreaterThan(Integer age){
 
@@ -78,17 +96,6 @@ public class StudentService {
     }
 
 
-     // retrieve students in paginated  and sorted format
-   // public Page<StudentDTO> getStudents(int page, int size) {
-    //    Pageable pageable = PageRequest.of(page,size, Sort.by("age").ascending());
-     //   return studentRepository.findAll(pageable)
-     //           .map(StudentMapper::toDTO);
-
-   // }
-
-
-
-
 
     // Retrieve a student by ID as DTO
     public StudentDTO getStudentById(Long id) {
@@ -96,20 +103,6 @@ public class StudentService {
         return StudentMapper.toDTO(student);
     }
 
-//    retrieving students by firstname
-//
-//    public List<Student> getStudentsByFirstName(String firstName){
-//        return studentRepository.findByFirstName(firstName);
-//    }
-//    public List<Student> getStudentsByLastName(String lastName){
-//        return studentRepository.findByLastName(lastName);
-//    }
-//    public List<Student> getStudentsByAge(Integer age){
-//        return studentRepository.findByAge(age);
-//    }
-//    public List<Student> getStudentsByAgeGreaterThan(Integer age){
-//        return studentRepository.findByAgeGreaterThan(age);
-//    }
 
     // Create a new student from DTO and return DTO
     public StudentDTO createStudent(StudentDTO studentDTO) {
@@ -150,6 +143,14 @@ public class StudentService {
         Student student = findStudentEntityById(id);
         studentRepository.delete(student);
     }
+
+    // retrieve students in paginated  and sorted format
+    // public Page<StudentDTO> getStudents(int page, int size) {
+    //    Pageable pageable = PageRequest.of(page,size, Sort.by("age").ascending());
+    //   return studentRepository.findAll(pageable)
+    //           .map(StudentMapper::toDTO);
+
+    // }
 
     // Pagination
     public Page<StudentDTO> getAllStudentsPaginated(Pageable pageable) {
