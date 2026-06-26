@@ -121,8 +121,6 @@ public class StudentController {
 
 
 
-
-
     // CREATE a student - POST http://localhost:8080/api/students
     @PostMapping
    public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentDTO studentDTO) {
