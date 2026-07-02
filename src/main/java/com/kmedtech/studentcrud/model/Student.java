@@ -1,11 +1,6 @@
 package com.kmedtech.studentcrud.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "students")
@@ -26,6 +21,10 @@ public class Student {
 
     @Column(name = "age")
     private Integer age;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
     // Default Constructor (required by JPA)
     public Student() {
@@ -78,6 +77,14 @@ public class Student {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Address getAddress(){
+        return address;
+    }
+
+    public void setAddress(Address address){
+        this.address = address;
     }
 
     @Override

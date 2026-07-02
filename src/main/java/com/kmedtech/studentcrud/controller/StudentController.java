@@ -112,13 +112,13 @@ public class StudentController {
 
     // get all students with Pagination
 
-    @GetMapping("/paginated")
-    public ResponseEntity<Page<StudentDTO>> getAllStudentsPaginated(Pageable pageable) {
-
-        Page<StudentDTO> students = studentService.getAllStudentsPaginated(pageable);
-
-        return ResponseEntity.ok(students);
-    }
+//    @GetMapping("/paginated")
+//    public ResponseEntity<Page<StudentDTO>> getAllStudentsPaginated(Pageable pageable) {
+//
+//        Page<StudentDTO> students = studentService.getAllStudentsPaginated(pageable);
+//
+//        return ResponseEntity.ok(students);
+//    }
 
 
 

@@ -153,15 +153,15 @@ public class StudentService {
     // }
 
     // Pagination
-    public Page<StudentDTO> getAllStudentsPaginated(Pageable pageable) {
+   // public Page<StudentDTO> getAllStudentsPaginated(Pageable pageable) {
 
-        return studentRepository.findAll(pageable).map(student -> new StudentDTO(
+//        return studentRepository.findAll(pageable).map(student -> new StudentDTO(
+//
+//                student.getId(),
+//        student.getFirstName(),
+//        student.getLastName(),
+//        student.getEmail(),
+//        student.getAge()));
 
-                student.getId(),
-        student.getFirstName(),
-        student.getLastName(),
-        student.getEmail(),
-        student.getAge()));
 
-    }
 }
