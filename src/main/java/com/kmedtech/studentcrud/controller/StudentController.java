@@ -103,22 +103,22 @@ public class StudentController {
        return ResponseEntity.ok(student);
    }
 
-   // Get students in paginated format
-  // @GetMapping("/Paginated")
-   //public Page<StudentDTO> getStudents(@RequestParam int page,
-      //                                 @RequestParam int size){
-      //  return studentService.getStudents(page,size);
-  // }
+    //Get students in paginated format
+   @GetMapping("/Paginated")
+   public Page<StudentDTO> getStudents(@RequestParam int page,
+                                       @RequestParam int size){
+        return studentService.getStudents(page,size);
+   }
 
-    // get all students with Pagination
+     //get all students with Pagination
 
-//    @GetMapping("/paginated")
-//    public ResponseEntity<Page<StudentDTO>> getAllStudentsPaginated(Pageable pageable) {
-//
-//        Page<StudentDTO> students = studentService.getAllStudentsPaginated(pageable);
-//
-//        return ResponseEntity.ok(students);
-//    }
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<StudentDTO>> getAllStudentsPaginated(Pageable pageable) {
+
+        Page<StudentDTO> students = studentService.getAllStudentsPaginated(pageable);
+
+        return ResponseEntity.ok(students);
+    }
 
 
 
