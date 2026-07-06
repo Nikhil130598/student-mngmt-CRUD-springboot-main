@@ -132,6 +132,8 @@ public class StudentController {
 
 
 
+
+
     // UPDATE a student - PUT http://localhost:8080/api/students/{id}
     @PutMapping("/{id}")
     public ResponseEntity<StudentDTO> updateStudent(@PathVariable Long id, @RequestBody StudentDTO studentDetailsDTO) {
@@ -145,6 +147,8 @@ public class StudentController {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
+
+
 
 
 }
