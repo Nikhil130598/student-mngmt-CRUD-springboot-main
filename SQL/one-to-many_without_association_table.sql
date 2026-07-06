@@ -26,9 +26,11 @@ select e.emp_name, d.dept_name from employees2 e join department2 d on e.dept_id
 select e.emp_name, d.dept_name, e.emp_salary from employees2 e join department2 d on e.dept_id = d.dept_id
 where e.emp_salary>27000;
 
-delete from department2;
+
 
 delete from employees2;
+
+delete from department2;
 
 
 

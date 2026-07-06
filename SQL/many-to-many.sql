@@ -13,7 +13,7 @@ create table empmanytomany(emp_id int primary key, emp_name varchar(50), emp_sal
 
 insert into empmanytomany(emp_id, emp_name, emp_salary)
 values(1, 'Nikhil', 25000),
-(2, 'Suneel', 26000), (3, 'Rajkumar', 32000), (4, 'Ram', 30000), (5, 'Jyothi', 25750), 
+(2, 'Suneel', 26000), (3, 'Rajkumar', 32000), (4, 'Ram', 30000), (5, 'Jyothi', 25750),
 (6, 'Sruthik', 25600), (7, 'Sandeep', 28000), (8, 'Sirisha', 26550), (9, 'Mehatb', 32000);
 
 select * from empmanytomany;

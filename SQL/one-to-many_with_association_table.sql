@@ -39,11 +39,11 @@ select d1.dept_name, e.emp_name from dept_emp1 de1 join department1 d1 on
 de1.dept_id = d1.dept_id join employees e on de1.emp_id = e.emp_id;
 
 
-
-
-delete from employees;
-delete from department1;
 delete from dept_emp1;
+
+delete from department1;
+delete from employees;
+
 
 
 
