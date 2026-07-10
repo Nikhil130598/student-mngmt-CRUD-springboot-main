@@ -24,10 +24,10 @@ public class Marks {
     private Long marksId;
 
     @Column(name = "subjectName", nullable = false)
-    private String subject;
+    private String subjectName;
 
-    @Column(name = "s_marks", nullable = false)
-    private Integer s_marks;
+    @Column(name = "marks", nullable = false)
+    private Integer marks;
 
 
     @ManyToOne

@@ -36,6 +36,8 @@ public class StudentDTO {
 
     private List<MarksDTO> marks;
 
+    private List<SubjectDTO> subjects;
+
 
 
      //Default Constructor

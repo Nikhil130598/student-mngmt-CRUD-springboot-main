@@ -18,25 +18,12 @@ public class MarksDTO {
     private Long marksId;
 
     @NotBlank(message = "subject name can't be blank")
-    private String subject;
+    private String subjectName;
 
     @Min(value=35)
     @Max(value = 100)
-    private Integer s_marks;
+    private Integer marks;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private StudentDTO studentdto;
 
-    public MarksDTO(Long marksId, String subject, Integer s_marks) {
-        this.marksId = marksId;
-        this.subject = subject;
-        this.s_marks = s_marks;
-
-    }
-
-    public MarksDTO() {
-
-    }
 }

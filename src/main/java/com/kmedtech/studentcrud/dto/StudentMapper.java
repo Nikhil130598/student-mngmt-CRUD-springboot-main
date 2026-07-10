@@ -5,9 +5,12 @@ import com.kmedtech.studentcrud.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class StudentMapper {
-@Autowired
-    private  MarksMapper marksMapper;
 
+@Autowired
+private MarksMapper marksMapper;
+
+@Autowired
+private  SubjectMapper subjectMapper;
     // Convert Entity to DTO
     public static StudentDTO toDTO(Student student) {
 
@@ -36,12 +39,26 @@ public class StudentMapper {
             dto.setMarks(
                     student.getMarks()
                             .stream()
-                            .map(MarksMapper::toDto)
+                            .map(MarksMapper::toDTO)
                             .toList()
 
 
             );
         }
+
+        if (student.getSubjects() != null) {
+            dto.setSubjects(
+                    student.getSubjects()
+                            .stream()
+                            .map(SubjectMapper::toDTO)
+                            .toList()
+
+
+            );
+        }
+
+
+
 
 
 
@@ -105,6 +122,14 @@ public class StudentMapper {
                     dto.getMarks()
                             .stream()
                             .map(MarksMapper::toEntity)
+                            .toList()
+            );
+        }
+        if(dto.getSubjects() != null){
+            student.setSubjects(
+                    dto.getSubjects()
+                            .stream()
+                            .map(SubjectMapper::toEntity)
                             .toList()
             );
         }

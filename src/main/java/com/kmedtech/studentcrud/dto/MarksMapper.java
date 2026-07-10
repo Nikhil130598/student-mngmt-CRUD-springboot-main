@@ -6,7 +6,7 @@ import com.kmedtech.studentcrud.model.Marks;
 
 public class MarksMapper {
 
-    public static MarksDTO toDto(Marks marks) {
+    public static MarksDTO toDTO(Marks marks) {
         if (marks == null) {
             return null;
         }
@@ -16,8 +16,8 @@ public class MarksMapper {
 
 
         dto.setMarksId(marks.getMarksId());
-        dto.setSubject(marks.getSubject());
-        dto.setS_marks(marks.getS_marks());
+        dto.setSubjectName(marks.getSubjectName());
+        dto.setMarks(marks.getMarks());
 
         return dto;
     }
@@ -30,9 +30,12 @@ public class MarksMapper {
         Marks marks = new Marks();
 
         marks.setMarksId(dto.getMarksId());
-        marks.setSubject(dto.getSubject());
-        marks.setS_marks(dto.getS_marks());
+        marks.setSubjectName(dto.getSubjectName());
+
+        marks.setMarks(dto.getMarks());
 
         return marks;
     }
+
+
 }
