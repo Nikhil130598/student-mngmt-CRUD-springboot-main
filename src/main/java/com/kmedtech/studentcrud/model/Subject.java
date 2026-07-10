@@ -2,11 +2,17 @@ package com.kmedtech.studentcrud.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "subjects")
+
 public class Subject {
 
     @Id
@@ -26,21 +32,21 @@ public class Subject {
         this.subjectName = subjectName;
     }
 
-    public Long getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
-
-
+//    public Long getSubjectId() {
+//        return subjectId;
+//    }
+//
+//    public void setSubjectId(Long subjectId) {
+//        this.subjectId = subjectId;
+//    }
+//
+//    public String getSubjectName() {
+//        return subjectName;
+//    }
+//
+//    public void setSubjectName(String subjectName) {
+//        this.subjectName = subjectName;
+//    }
+//
+//
 }

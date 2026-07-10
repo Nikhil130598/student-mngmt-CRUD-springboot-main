@@ -1,7 +1,6 @@
 package com.kmedtech.studentcrud.dto;
 
 
-import com.kmedtech.studentcrud.model.Student;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

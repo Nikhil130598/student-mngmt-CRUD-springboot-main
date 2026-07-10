@@ -13,8 +13,6 @@ public class MarksMapper {
 
         MarksDTO dto = new MarksDTO();
 
-
-
         dto.setMarksId(marks.getMarksId());
         dto.setSubjectName(marks.getSubjectName());
         dto.setMarks(marks.getMarks());
@@ -28,14 +26,10 @@ public class MarksMapper {
         }
 
         Marks marks = new Marks();
-
         marks.setMarksId(dto.getMarksId());
         marks.setSubjectName(dto.getSubjectName());
-
         marks.setMarks(dto.getMarks());
 
         return marks;
     }
-
-
 }

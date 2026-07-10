@@ -20,7 +20,6 @@ public class Marks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-
     private Long marksId;
 
     @Column(name = "subjectName", nullable = false)
@@ -29,10 +28,8 @@ public class Marks {
     @Column(name = "marks", nullable = false)
     private Integer marks;
 
-
     @ManyToOne
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
-
 
 }

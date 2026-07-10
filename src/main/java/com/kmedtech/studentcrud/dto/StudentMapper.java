@@ -124,6 +124,10 @@ private  SubjectMapper subjectMapper;
                             .map(MarksMapper::toEntity)
                             .toList()
             );
+
+            if(student.getMarks() != null){
+                student.getMarks().forEach(mark -> mark.setStudent(student));
+            }
         }
         if(dto.getSubjects() != null){
             student.setSubjects(
