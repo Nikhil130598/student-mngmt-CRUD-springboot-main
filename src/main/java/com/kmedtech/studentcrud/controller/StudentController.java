@@ -3,6 +3,7 @@ package com.kmedtech.studentcrud.controller;
 import com.kmedtech.studentcrud.dto.StudentDTO;
 import com.kmedtech.studentcrud.model.Student;
 import com.kmedtech.studentcrud.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -125,7 +126,7 @@ public class StudentController {
 
     // CREATE a student - POST http://localhost:8080/api/students
     @PostMapping
-   public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentDTO studentDTO) {
+   public ResponseEntity<StudentDTO> createStudent(@RequestBody @Valid StudentDTO studentDTO) {
        StudentDTO createdStudent = studentService.createStudent(studentDTO);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
    }

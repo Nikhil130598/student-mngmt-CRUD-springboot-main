@@ -2,8 +2,11 @@ package com.kmedtech.studentcrud.dto;
 
 import com.kmedtech.studentcrud.model.Address;
 import com.kmedtech.studentcrud.model.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class StudentMapper {
+@Autowired
+    private  MarksMapper marksMapper;
 
     // Convert Entity to DTO
     public static StudentDTO toDTO(Student student) {
@@ -29,7 +32,22 @@ public class StudentMapper {
 
         }
 
+        if (student.getMarks() != null) {
+            dto.setMarks(
+                    student.getMarks()
+                            .stream()
+                            .map(MarksMapper::toDto)
+                            .toList()
+
+
+            );
+        }
+
+
+
         return dto;
+
+
 
     }
 
@@ -80,6 +98,15 @@ public class StudentMapper {
             address.setZipCode(dto.getAddress().getZipCode());
 
             student.setAddress(address);
+        }
+
+        if(dto.getMarks() != null){
+            student.setMarks(
+                    dto.getMarks()
+                            .stream()
+                            .map(MarksMapper::toEntity)
+                            .toList()
+            );
         }
 
         return student;
