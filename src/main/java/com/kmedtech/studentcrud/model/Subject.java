@@ -8,10 +8,11 @@ import lombok.Setter;
 import java.util.List;
 
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "subjects")
+@Getter
+@Setter
 
 public class Subject {
 
@@ -32,7 +33,7 @@ public class Subject {
         this.subjectName = subjectName;
     }
 
-//    public Long getSubjectId() {
+   //public Long getSubjectId() {
 //        return subjectId;
 //    }
 //

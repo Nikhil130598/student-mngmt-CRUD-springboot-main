@@ -12,11 +12,8 @@ public class SubjectMapper {
 
         SubjectDTO dto = new SubjectDTO();
 
-
-
         dto.setSubjectId(subject.getSubjectId());
         dto.setSubjectName(subject.getSubjectName());
-
 
         return dto;
     }

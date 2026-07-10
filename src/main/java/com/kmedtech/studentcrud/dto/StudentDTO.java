@@ -53,15 +53,15 @@ public class StudentDTO {
         this.age = age;
     }
 
-    public StudentDTO(Long id, String firstName, String lastName, String email, Integer age, List<MarksDTO> marks) {
-
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-        this.marks = marks;
-    }
+//    public StudentDTO(Long id, String firstName, String lastName, String email, Integer age, List<MarksDTO> marks) {
+//
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.age = age;
+//        this.marks = marks;
+//    }
 
     // Getters and Setters
 //    public Long getId() {
