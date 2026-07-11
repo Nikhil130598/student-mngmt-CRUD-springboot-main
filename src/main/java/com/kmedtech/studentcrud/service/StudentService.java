@@ -151,18 +151,9 @@ public class StudentService {
 
     }
 
-    //Pagination
+    //Pagination - get all students with Pagination
     public Page<StudentDTO> getAllStudentsPaginated(Pageable pageable) {
-
-        return studentRepository.findAll(pageable).map(student -> new StudentDTO(
-
-                student.getId(),
-                student.getFirstName(),
-                student.getLastName(),
-                student.getEmail(),
-                student.getAge()));
-
-
+         return studentRepository.findAll(pageable).map(StudentMapper::toDTO);
     }
 
 }

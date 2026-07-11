@@ -2,17 +2,14 @@ package com.kmedtech.studentcrud.dto;
 
 import com.kmedtech.studentcrud.model.Address;
 import com.kmedtech.studentcrud.model.Student;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class StudentMapper {
 
-@Autowired
-private MarksMapper marksMapper;
-
-@Autowired
-private  SubjectMapper subjectMapper;
     // Convert Entity to DTO
     public static StudentDTO toDTO(Student student) {
+        if (student == null) {
+            return null;
+        }
 
         StudentDTO dto = new StudentDTO();
 
@@ -99,6 +96,9 @@ private  SubjectMapper subjectMapper;
 //}
 
     public static Student toEntity(StudentDTO dto) {
+        if (dto == null){
+            return null;
+    }
 
         Student student = new Student();
       student.setId(dto.getId());
@@ -133,7 +133,7 @@ private  SubjectMapper subjectMapper;
             student.setSubjects(
                     dto.getSubjects()
                             .stream()
-                            .map(SubjectMapper::toEntity)
+                            .map(SubjectMapper::toEntityWithDeduplication)
                             .toList()
             );
         }
