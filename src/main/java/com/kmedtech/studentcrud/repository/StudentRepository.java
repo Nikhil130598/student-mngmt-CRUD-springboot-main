@@ -1,6 +1,7 @@
 package com.kmedtech.studentcrud.repository;
 
 
+import com.kmedtech.studentcrud.model.Marks;
 import com.kmedtech.studentcrud.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findByLastName(String lastName);
     List<Student> findByAge(Integer age);
     List<Student> findByAgeGreaterThan(Integer age);
+    Optional<Student> findByAddressId(Long addressId);
+List<Student> findByMarksGreaterThan(Integer marks);
+
 
 
 }
