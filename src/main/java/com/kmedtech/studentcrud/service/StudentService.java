@@ -9,6 +9,7 @@ import com.kmedtech.studentcrud.model.Address;
 import com.kmedtech.studentcrud.model.Marks;
 import com.kmedtech.studentcrud.model.Student;
 import com.kmedtech.studentcrud.model.Subject;
+import com.kmedtech.studentcrud.repository.MarksRepository;
 import com.kmedtech.studentcrud.repository.StudentRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -28,10 +29,13 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
+
     // Constructor injection
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
+
+
 
     // Helper method to find the Student Entity internally
     private Student findStudentEntityById(Long id) {
@@ -409,6 +413,11 @@ public class StudentService {
                 .toList();
     }
 
+
+
+
+
+
     // ============ MANY-TO-MANY STUDENT-SUBJECT METHODS ============
 
     // GET all subjects for a student
@@ -636,6 +645,47 @@ public class StudentService {
                 .toList();
     }
 
+    // ============ ONE-TO-ONE STUDENT-ADDRESS METHODS ============
+
+    // GET address for a specific student
+    public AddressDTO getAddressByStudentId(Long studentId) {
+        Student student = findStudentEntityById(studentId);
+        Address address = student.getAddress();
+        if (address == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found for student: " + studentId);
+        }
+        AddressDTO dto = new AddressDTO();
+        dto.setId(address.getId());
+        dto.setStreet(address.getStreet());
+        dto.setCity(address.getCity());
+        dto.setState(address.getState());
+        dto.setZipCode(address.getZipCode());
+        return dto;
+    }
+
+    // GET student by address id
+    public StudentDTO getStudentByAddressIdDTO(Long addressId) {
+        Student student = getStudentsByAddressId(addressId);
+        return StudentMapper.toDTO(student);
+    }
+
+    // GET all addresses
+    public List<AddressDTO> getAllAddressesDTO() {
+        return studentRepository.findAll()
+                .stream()
+                .map(Student::getAddress)
+                .filter(address -> address != null)
+                .map(address -> {
+                    AddressDTO dto = new AddressDTO();
+                    dto.setId(address.getId());
+                    dto.setStreet(address.getStreet());
+                    dto.setCity(address.getCity());
+                    dto.setState(address.getState());
+                    dto.setZipCode(address.getZipCode());
+                    return dto;
+                })
+                .toList();
+    }
 
 }
 

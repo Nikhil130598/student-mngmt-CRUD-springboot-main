@@ -202,6 +202,28 @@ public class StudentController {
        return ResponseEntity.ok(studentService.getAllMarksForAllStudents());
    }
 
+
+
+   //  ONE-TO-ONE STUDENT-ADDRESS APIS
+
+   // GET address for a student
+   @GetMapping("/{studentId}/address")
+   public ResponseEntity<AddressDTO> getStudentAddress(@PathVariable Long studentId) {
+       return ResponseEntity.ok(studentService.getAddressByStudentId(studentId));
+   }
+
+   // GET student by address id
+   @GetMapping("/address/{addressId}/student")
+   public ResponseEntity<StudentDTO> getStudentByAddressId(@PathVariable Long addressId) {
+       return ResponseEntity.ok(studentService.getStudentByAddressIdDTO(addressId));
+   }
+
+   // GET all addresses
+   @GetMapping("/addresses/all")
+   public ResponseEntity<List<AddressDTO>> getAllAddresses() {
+       return ResponseEntity.ok(studentService.getAllAddressesDTO());
+   }
+
    // ============ MANY-TO-MANY STUDENT-SUBJECT APIS ============
 
    // GET all subjects for a student

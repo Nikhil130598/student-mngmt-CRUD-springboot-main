@@ -23,6 +23,7 @@ public class StudentMapper {
 
             AddressDTO addressDTO = new AddressDTO();
 
+            addressDTO.setId(student.getAddress().getId());
             addressDTO.setStreet(student.getAddress().getStreet());
             addressDTO.setCity(student.getAddress().getCity());
             addressDTO.setState(student.getAddress().getState());
@@ -102,6 +103,7 @@ public class StudentMapper {
 
         if(dto.getAddress() != null){
             Address address =  new Address();
+            address.setId(dto.getAddress().getId());
             address.setStreet(dto.getAddress().getStreet());
             address.setCity(dto.getAddress().getCity());
             address.setState(dto.getAddress().getState());
