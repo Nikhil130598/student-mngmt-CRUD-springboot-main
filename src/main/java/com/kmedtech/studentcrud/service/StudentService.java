@@ -11,6 +11,7 @@ import com.kmedtech.studentcrud.model.Student;
 import com.kmedtech.studentcrud.model.Subject;
 import com.kmedtech.studentcrud.repository.MarksRepository;
 import com.kmedtech.studentcrud.repository.StudentRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+@Log4j2
 @Service
 public class StudentService {
 
@@ -39,6 +42,7 @@ public class StudentService {
 
     // Helper method to find the Student Entity internally
     private Student findStudentEntityById(Long id) {
+
         return studentRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Student not found with id: " + id));
@@ -137,7 +141,11 @@ public class StudentService {
 
     // Retrieve a student by ID as DTO
     public StudentDTO getStudentById(Long id) {
+        log.info("Fetching student with id {}", id);
         Student student = findStudentEntityById(id);
+
+        log.info("Student fetched successfully");
+
         return StudentMapper.toDTO(student);
     }
 
