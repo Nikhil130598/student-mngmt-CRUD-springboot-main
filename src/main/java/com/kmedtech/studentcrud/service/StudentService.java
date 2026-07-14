@@ -1,10 +1,6 @@
 package com.kmedtech.studentcrud.service;
 
-import com.kmedtech.studentcrud.dto.AddressDTO;
-import com.kmedtech.studentcrud.dto.MarksDTO;
-import com.kmedtech.studentcrud.dto.StudentDTO;
-import com.kmedtech.studentcrud.dto.StudentMapper;
-import com.kmedtech.studentcrud.dto.SubjectDTO;
+import com.kmedtech.studentcrud.dto.*;
 import com.kmedtech.studentcrud.model.Address;
 import com.kmedtech.studentcrud.model.Marks;
 import com.kmedtech.studentcrud.model.Student;
@@ -31,11 +27,14 @@ import java.util.Map;
 public class StudentService {
 
     private final StudentRepository studentRepository;
-
+    private final MarksRepository marksRepository;
+private final SubjectMapper subjectMapper;
 
     // Constructor injection
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, MarksRepository marksRepository, SubjectMapper subjectMapper) {
         this.studentRepository = studentRepository;
+        this.marksRepository = marksRepository;
+        this.subjectMapper = subjectMapper;
     }
 
 
@@ -110,7 +109,6 @@ public class StudentService {
 
 
     public List<MarksDTO> getStudentMarks(Long studentId) {
-        log.info("Fetching marks for student with id {}", studentId);
 
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() ->
@@ -118,13 +116,7 @@ public class StudentService {
 
         return student.getMarks()
                 .stream()
-                .map(mark -> {
-                    MarksDTO dto = new MarksDTO();
-                    dto.setMarksId(mark.getMarksId());
-                    dto.setSubjectName(mark.getSubjectName());
-                    dto.setMarks(mark.getMarks());
-                    return dto;
-                })
+                .map(MarksMapper::toDTO)
                 .toList();
     }
 
@@ -236,42 +228,79 @@ public class StudentService {
     }
 
     // GET marks - all marks
-    public List<Object> getAllMarks() {
-        log.info("Fetching all student marks");
-        log.info("Found all student marks");
+//    public List<Object> getAllMarks() {
+//        log.info("Fetching all student marks");
+//        log.info("Found all student marks");
+//        return studentRepository.findAll()
+//                .stream()
+//                .flatMap(student -> student.getMarks().stream())
+//                .map(Object.class::cast)
+//                .toList();
+//    }
+    // GET marks - all marks
+    public List<MarksDTO> getAllMarks() {
+
         return studentRepository.findAll()
                 .stream()
                 .flatMap(student -> student.getMarks().stream())
-                .map(Object.class::cast)
+                .map(MarksMapper::toDTO)
                 .toList();
     }
 
-    // GET marks by student ID
-    public List<Object> getMarksByStudentId(Long studentId) {
-        log.info("Fetching marks for student with id {}", studentId);
+//    // GET marks by student ID
+//    public List<Object> getMarksByStudentId(Long studentId) {
+//        log.info("Fetching marks for student with id {}", studentId);
+//        Student student = findStudentEntityById(studentId);
+//        log.info("Found student with id {}", studentId);
+//        log.info("Found marks for student with id {}", studentId);
+//        return student.getMarks().stream()
+//                .map(Object.class::cast)
+//                .toList();
+//    }
+
+    public List<MarksDTO> getMarksByStudentId(Long studentId) {
+
         Student student = findStudentEntityById(studentId);
-        log.info("Found student with id {}", studentId);
-        log.info("Found marks for student with id {}", studentId);
-        return student.getMarks().stream()
-                .map(Object.class::cast)
+
+        return student.getMarks()
+                .stream()
+                .map(MarksMapper::toDTO)
                 .toList();
     }
 
     // GET marks by subject
-    public List<Object> getMarksBySubject(String subjectName) {
-        log.info("Fetching marks for subject {}", subjectName);
-        log.info("Found marks for subject {}", subjectName);
+//    public List<MarksDTO> getMarksBySubject(String subjectName) {
+//        log.info("Fetching marks for subject {}", subjectName);
+//        log.info("Found marks for subject {}", subjectName);
+//
+//        return studentRepository.findAll()
+//                .stream()
+//                .flatMap(student -> student.getMarks().stream())
+//                .filter(mark -> mark.getSubjectName().equalsIgnoreCase(subjectName))
+//                .map(MarksMapper::toDTO)
+//                .toList();
+//    }
 
-        return studentRepository.findAll()
+    public List<MarksDTO> getMarksBySubject(String subjectName) {
+
+        log.info("Fetching marks for subject {}", subjectName);
+
+        List<MarksDTO> marks = studentRepository.findAll()
                 .stream()
                 .flatMap(student -> student.getMarks().stream())
-                .filter(mark -> mark.getSubjectName().equalsIgnoreCase(subjectName))
-                .map(Object.class::cast)
+                .filter(mark ->
+                        mark.getSubjectName().equalsIgnoreCase(subjectName))
+                .map(MarksMapper::toDTO)
                 .toList();
+
+        log.info("Found {} marks records for subject {}",
+                marks.size(), subjectName);
+
+        return marks;
     }
 
     // GET marks by student ID and subject
-    public Object getMarksByStudentAndSubject(Long studentId, String subjectName) {
+    public MarksDTO getMarksByStudentAndSubject(Long studentId, String subjectName) {
         log.info("Fetching marks for student with id {}", studentId);
         log.info("Fetching marks for subject {}", subjectName);
 
@@ -280,38 +309,40 @@ public class StudentService {
         return student.getMarks().stream()
                 .filter(mark -> mark.getSubjectName().equalsIgnoreCase(subjectName))
                 .findFirst()
+                .map(MarksMapper::toDTO)
                 .orElse(null);
     }
 
     // GET all subjects
-    public List<Object> getAllSubjects() {
+    public List<SubjectDTO> getAllSubjects() {
         return studentRepository.findAll()
                 .stream()
                 .flatMap(student -> student.getSubjects().stream())
                 .distinct()
-                .map(Object.class::cast)
+                .map(SubjectMapper::toDTO)
                 .toList();
     }
 
     // GET subject by ID
-    public Object getSubjectById(Long subjectId) {
-        log.info("Fetching subject with id {}", subjectId);
-        log.info("Found subject with id {}", subjectId);
-        return studentRepository.findAll()
+    public SubjectDTO getSubjectById(Long subjectId) {
+
+        Subject subject = studentRepository.findAll()
                 .stream()
                 .flatMap(student -> student.getSubjects().stream())
-                .filter(subject -> subject.getSubjectId().equals(subjectId))
+                .filter(s -> s.getSubjectId().equals(subjectId))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new RuntimeException("Subject not found"));
+
+        return subjectMapper.toDTO(subject);
     }
 
     // GET subjects by student ID
-    public List<Object> getSubjectsByStudentId(Long studentId) {
+    public List<SubjectDTO> getSubjectsByStudentId(Long studentId) {
         log.info("Fetching subjects for student with id {}", studentId);
         log.info("Found student with id {}", studentId);
         Student student = findStudentEntityById(studentId);
         return student.getSubjects().stream()
-                .map(Object.class::cast)
+                .map(SubjectMapper::toDTO)
                 .toList();
     }
 
